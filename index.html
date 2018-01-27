@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Cars</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+
+<!-- 
+<div class="checkboxes">
+  <input name="XLV" type="checkbox" value="xlv" id="XLV" rel="XLV"/>
+  <label>XLV</label><br/>
+   <input name="Tivoli" type="checkbox" value="Tivoli"  id="Tivoli" rel="Tivoli"/>
+  <label>Entry 2</label><br/>
+   <input name="Korando" type="checkbox" value="Korando"  id="Korando" rel="Korando"/>
+  <label>Entry 3</label><br/>
+</div> -->
+
+
+
+
+<h1 class="title">gorące oferty</h1>
+
+    <div class="models-cars">
+        <h2>wybierz model</h2>
+    </div>
+
+
+  <div class="all-cars"></div>
+  
+  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+  <script>
+    const API = 'http://stock.ssangyong.pl/api/getHotoffers/index.php';
+  
+  $.getJSON(API, data => {
+
+    const itemcar = data.map(item => (
+      `<div class="${item.params.model} item-car">
+    <div class="image">
+        <div class="car-model ${item.params.model}">
+            <h2><span>${item.params.model}</span> ${item.params.trim}</h2>
+            <h3>nowy</h3>
+        </div>
+        <img src="http://www.ssangyong.pl/konfigurator-images/images/${item.params.model.toLowerCase()}/${item.params.my}/colors/cars/${item.params.color.replace(' ', '_').replace(' ', '_').toLowerCase()}.png">
+    </div>
+
+
+
+    <div class="description">
+        <h2><span>${item.params.engine_capacity} ${item.params.fuel_type}</span> ${item.params.transmission} ${item.params.gearbox} | ${item.params.color}</h2>
+        <br>
+        <table>
+            <tr>
+                <td>Wersja:</td>
+                <td>${item.params.trim}</td>
+            </tr>
+
+            <tr>
+                <td>Rok produkcji:</td>
+                <td>${item.params.year}</td>
+            </tr>
+
+            <tr>
+                <td>Rok modelowy:</td>
+                <td>${item.params.my}</td>
+            </tr>
+
+            <tr>
+                <td>Wyposażenie:</td>
+                <td>${item.params.option}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="price">
+
+        <div class="old-price">
+            <div class="old-price-title"><span class="title">cena bazowa: </span><p class="num">${item.params.price.srp} <span class="pln">pln</span></p></div>
+        </div>
+
+        <div class="sale-price">
+            <div class="sale-price-title"><span class="title">rabat: </span><p class="num">-${item.params.price.discount} <span class="pln">pln</span></p></div>
+            
+        </div>
+
+        <div class="hot-price">
+            <div class="hot-price-title"><span class="title">gorąca cena: </span><p class="num">${item.params.price.hot_price} <span class="pln">pln</span></p></div>
+        </div>
+
+        <div class="zapytaj">
+            <a href="#">zapytaj</a>
+        </div>
+    </div>
+</div>`
+    ));
+
+    $('.all-cars').append(itemcar);
+  });
+
+  </script>
+
+
+
+
+
+  <script>
+    const API2 = 'http://stock.ssangyong.pl/api/getHotModels/index.php';
+  
+  $.getJSON(API2, data => {
+
+    const model = data.map(item => (
+      `<label><input name="${item.model}" type="checkbox" value="${item.model}" id="${item.model}">
+        ${item.model}</label><br>`
+    ));
+
+    $('.models-cars').append(model);
+  });
+
+  </script>
+
+
+<!-- 
+<script type="text/javascript">
+    $('input[type="checkbox"]').click(function() {
+    if ($('input[type="checkbox"]:checked').length > 0) {
+        $('.all-cars').prepend($('.all-cars > div[class=' + this.id + ' ' + 'item-car' + ']'));
+
+
+        $('.all-cars > div').hide();
+        $('input[type="checkbox"]:checked').each(function() {
+            $('.all-cars > div[class=' + this.id + ' ' + 'item-car' + ']').fadeIn("slow");
+        });
+    } else {
+        var array  = ['XLV item-car', 'Tivoli item-car', 'Korando item-car'] ;
+         $.each(array,function(index,value){
+           $('.all-cars').append($('.'+value));    // add . here
+          });
+        $('.all-cars > div').fadeIn("slow");
+    }
+});
+</script> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
