@@ -8,21 +8,6 @@
 </head>
 <body>
 
-
-
-<!-- 
-<div class="checkboxes">
-  <input name="XLV" type="checkbox" value="xlv" id="XLV" rel="XLV"/>
-  <label>XLV</label><br/>
-   <input name="Tivoli" type="checkbox" value="Tivoli"  id="Tivoli" rel="Tivoli"/>
-  <label>Entry 2</label><br/>
-   <input name="Korando" type="checkbox" value="Korando"  id="Korando" rel="Korando"/>
-  <label>Entry 3</label><br/>
-</div> -->
-
-
-
-
 <h1 class="title">gorące oferty</h1>
 
     <div class="models-cars">
@@ -103,10 +88,6 @@
 
   </script>
 
-
-
-
-
   <script>
     const API2 = 'http://stock.ssangyong.pl/api/getHotModels/index.php';
   
@@ -121,39 +102,6 @@
   });
 
   </script>
-
-
-<!-- 
-<script type="text/javascript">
-    $('input[type="checkbox"]').click(function() {
-    if ($('input[type="checkbox"]:checked').length > 0) {
-        $('.all-cars').prepend($('.all-cars > div[class=' + this.id + ' ' + 'item-car' + ']'));
-
-
-        $('.all-cars > div').hide();
-        $('input[type="checkbox"]:checked').each(function() {
-            $('.all-cars > div[class=' + this.id + ' ' + 'item-car' + ']').fadeIn("slow");
-        });
-    } else {
-        var array  = ['XLV item-car', 'Tivoli item-car', 'Korando item-car'] ;
-         $.each(array,function(index,value){
-           $('.all-cars').append($('.'+value));    // add . here
-          });
-        $('.all-cars > div').fadeIn("slow");
-    }
-});
-</script> -->
-
-
-
-
-
-
-
-
-
-
-
 
 
 
