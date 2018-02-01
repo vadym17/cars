@@ -5,23 +5,21 @@
   <meta name="viewport" content="width=device-width">
   <title>Cars</title>
   <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.js"></script> 
 </head>
 <body>
-
-
 
 <h1 class="title">gorące oferty</h1>
 
 <div class="sortuj">
     <p>sortuj:</p>
-    <select name="price">
-        <option selected value="pricetop">cena     <span style="font-size: 10px">&#9650;</span></option>
-        <option value="pricebottom">cena     <span>&#9660;</span></option>
-        <option value="hotprice">gorąca cena</option>
+    <select class="selects" name="price">
+        <option value="1">cena     <span style="font-size: 10px">&#9650;</span></option>
+        <option value="0">cena     <span style="font-size: 10px">&#9660;</span></option> 
+        <option value="3">gorąca cena     <span style="font-size: 10px">&#9650;</span></option> 
+        <option value="4">gorąca cena     <span style="font-size: 10px">&#9660;</span></option> 
     </select>
 </div>
-
-
 
 <div class="models-cars">
     <h2>wybierz model</h2>
@@ -30,15 +28,14 @@
 
 <div class="all-cars"></div>
   
-<script src="https://code.jquery.com/jquery-3.1.0.js"></script> 
 
-<script>
+<script type="text/javascript">
     const API = 'http://stock.ssangyong.pl/api/getHotoffers/index.php';
   
   $.getJSON(API, data => {
 
     const itemcar = data.map(item => (
-      `<div class="${item.params.model} item-car">
+      `<div class="${item.params.model} item-car" data-price="${item.params.price.srp.replace('&nbsp;', "")}" data-hotprice="${item.params.price.hot_price.replace('&nbsp;', "")}">
     <div class="image">
         <div class="car-model ${item.params.model}">
             <h2><span>${item.params.model}</span> ${item.params.trim}</h2>
@@ -131,8 +128,29 @@
                });
             });
     }, 1500); 
-</script>
 
+    var list = $('.all-cars'), 
+    listCollection; 
+ 
+    $(".selects").change(function() { 
+      listCollection = $('.all-cars > div'); 
+      var sort = $(this).val(); 
+      listCollection.sort(function(a, b) { 
+        if (sort == 1) { 
+          return ($(a).data('price')) > ($(b).data('price')) ? 1 : -1; 
+        } else if (sort == 0) { 
+          return ($(a).data('price')) > ($(b).data('price')) ? -1 : 1; 
+        } else if (sort == 3) { 
+          return ($(a).data('hotprice')) > ($(b).data('hotprice')) ? 1 : -1; 
+        } else if (sort == 4) { 
+          return ($(a).data('hotprice')) > ($(b).data('hotprice')) ? -1 : 1; 
+        } 
+      }); 
+      list.html(listCollection); 
+    }); 
+ 
+    $(".selects").trigger('change');
+</script>
 
 
 </body>
