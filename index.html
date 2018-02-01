@@ -112,6 +112,22 @@
 
   </script>
 
+  
+  
+  <script type="text/javascript">
+      setTimeout(function () {
+          $(".models-cars :checkbox").click(function() {
+
+                 var re = new RegExp($(".models-cars :checkbox:checked").map(function() {
+                                        return this.value;
+                                     }).get().join("|") );
+                 $(".all-cars > div").each(function() {
+                    var $this = $(this);
+                    $this[re.source!="" && re.test($this.attr("class")) ? "show" : "hide"]();
+                 });
+              });
+      }, 1500); 
+  </script>
 
 </body>
 </html>
