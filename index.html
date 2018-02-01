@@ -8,126 +8,139 @@
 </head>
 <body>
 
+
+
 <h1 class="title">gorące oferty</h1>
 
-    <div class="sortuj">
-        <p>sortuj:</p>
-        <select name="price">
-            <option selected value="pricetop">cena     <span style="font-size: 10px">&#9650;</span></option>
-            <option value="pricebottom">cena     <span>&#9660;</span></option>
-            <option value="hotprice">gorąca cena</option>
-        </select>
-    </div>
+<div class="sortuj">
+    <p>sortuj:</p>
+    <select name="price">
+        <option selected value="pricetop">cena     <span style="font-size: 10px">&#9650;</span></option>
+        <option value="pricebottom">cena     <span>&#9660;</span></option>
+        <option value="hotprice">gorąca cena</option>
+    </select>
+</div>
 
-    <div class="models-cars">
-        <h2>wybierz model</h2>
-    </div>
 
-  <div class="all-cars"></div>
+
+<div class="models-cars">
+    <h2>wybierz model</h2>
+</div>
+
+
+<div class="all-cars"></div>
   
-  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-  <script>
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script> 
+
+<script>
     const API = 'http://stock.ssangyong.pl/api/getHotoffers/index.php';
   
-    $.getJSON(API, data => {
+  $.getJSON(API, data => {
 
     const itemcar = data.map(item => (
-        `<div class="${item.params.model} item-car">
-            <div class="image">
-                <div class="car-model ${item.params.model}">
-                    <h2><span>${item.params.model}</span> ${item.params.trim}</h2>
-                    <h3>nowy</h3>
-                </div>
-                <img src="http://www.ssangyong.pl/konfigurator-images/images/${item.params.model.toLowerCase()}/${item.params.my}/colors/cars/${item.params.color.replace(' ', '_').replace(' ', '_').toLowerCase()}.png">
-            </div>
+      `<div class="${item.params.model} item-car">
+    <div class="image">
+        <div class="car-model ${item.params.model}">
+            <h2><span>${item.params.model}</span> ${item.params.trim}</h2>
+            <h3>nowy</h3>
+        </div>
+        <img src="http://www.ssangyong.pl/konfigurator-images/images/${item.params.model.toLowerCase()}/${item.params.my}/colors/cars/${item.params.color.replace(' ', '_').replace(' ', '_').toLowerCase()}.png">
+    </div>
 
 
 
-            <div class="description">
-                <h2><span>${item.params.engine_capacity} ${item.params.fuel_type}</span> ${item.params.transmission} ${item.params.gearbox} | ${item.params.color}</h2>
-                <br>
-                <table>
-                    <tr>
-                        <td>Wersja:</td>
-                        <td>${item.params.trim}</td>
-                    </tr>
+    <div class="description">
+        <h2><span>${item.params.engine_capacity} ${item.params.fuel_type}</span> ${item.params.transmission} ${item.params.gearbox} | ${item.params.color}</h2>
+        <br>
+        <table>
+            <tr>
+                <td>Wersja:</td>
+                <td>${item.params.trim}</td>
+            </tr>
 
-                    <tr>
-                        <td>Rok produkcji:</td>
-                        <td>${item.params.year}</td>
-                    </tr>
+            <tr>
+                <td>Rok produkcji:</td>
+                <td>${item.params.year}</td>
+            </tr>
 
-                    <tr>
-                        <td>Rok modelowy:</td>
-                        <td>${item.params.my}</td>
-                    </tr>
+            <tr>
+                <td>Rok modelowy:</td>
+                <td>${item.params.my}</td>
+            </tr>
 
-                    <tr>
-                        <td>Wyposażenie:</td>
-                        <td>${item.params.option}</td>
-                    </tr>
-                </table>
-            </div>
+            <tr>
+                <td>Wyposażenie:</td>
+                <td>${item.params.option}</td>
+            </tr>
+        </table>
+    </div>
 
-            <div class="price">
+    <div class="price">
 
-                <div class="old-price">
-                    <div class="old-price-title"><span class="title">cena bazowa: </span><p class="num">${item.params.price.srp} <span class="pln">pln</span></p></div>
-                </div>
+        <div class="old-price">
+            <div class="old-price-title"><span class="title">cena bazowa: </span><p class="num">${item.params.price.srp} <span class="pln">pln</span></p></div>
+        </div>
 
-                <div class="sale-price">
-                    <div class="sale-price-title"><span class="title">rabat: </span><p class="num">-${item.params.price.discount} <span class="pln">pln</span></p></div>
-                    
-                </div>
+        <div class="sale-price">
+            <div class="sale-price-title"><span class="title">rabat: </span><p class="num">-${item.params.price.discount} <span class="pln">pln</span></p></div>
+            
+        </div>
 
-                <div class="hot-price">
-                    <div class="hot-price-title"><span class="title">gorąca cena: </span><p class="num">${item.params.price.hot_price} <span class="pln">pln</span></p></div>
-                </div>
+        <div class="hot-price">
+            <div class="hot-price-title"><span class="title">gorąca cena: </span><p class="num">${item.params.price.hot_price} <span class="pln">pln</span></p></div>
+        </div>
 
-                <div class="zapytaj">
-                    <a href="#">zapytaj</a>
-                </div>
-            </div>
-        </div>`
+        <div class="zapytaj">
+            <a href="#">zapytaj</a>
+        </div>
+    </div>
+</div>`
     ));
 
     $('.all-cars').append(itemcar);
-    
-    });
+  });
 
-  </script>
+</script>
 
-  <script>
+
+
+<script>
     const API2 = 'http://stock.ssangyong.pl/api/getHotModels/index.php';
-  
+
     $.getJSON(API2, data => {
 
-    const model = data.map(item => (
-      `<label><input name="${item.model}" type="checkbox" value="${item.model}" id="${item.model}">
-        ${item.model}</label><br>`
-    ));
+      const model = data.map(item => (
+        `<label><input name="${item.model}" type="checkbox" value="${item.model}" id="${item.model}">
+          ${item.model}</label><br>`
+      ));
 
-    $('.models-cars').append(model);
+      $('.models-cars').append(model);
     });
+</script>
 
-  </script>
+<script type="text/javascript">
+    setTimeout(function () {
+        $(".models-cars :checkbox").click(function() {
 
-  
-  
-  <script type="text/javascript">
-      setTimeout(function () {
-          $(".models-cars :checkbox").click(function() {
+               var re = new RegExp($(".models-cars :checkbox:checked").map(function() {
+                                      return this.value;
+                                   }).get().join("|") );
+               $(".all-cars > div").each(function() {
+                  var $this = $(this);
+                  $this[re.source!="" && re.test($this.attr("class")) ? "show" : "hide"]();
+               });
+            });
+    }, 500); 
+</script>
 
-                 var re = new RegExp($(".models-cars :checkbox:checked").map(function() {
-                                        return this.value;
-                                     }).get().join("|") );
-                 $(".all-cars > div").each(function() {
-                    var $this = $(this);
-                    $this[re.source!="" && re.test($this.attr("class")) ? "show" : "hide"]();
-                 });
-              });
-      }, 1500); 
-  </script>
+
+
+
+
+
+
+
+
 
 </body>
 </html>
